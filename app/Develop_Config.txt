@@ -1,0 +1,13 @@
+本项目的开发环境：
+
+前端Vue + 后端Spring Boot
+Vue框架5.0.8
+Spring Boot框架2.5.9
+Maven版本3.9.9
+
+数据库选用MySQL
+用户名root
+密码syb22123012
+
+开发IDE：
+前端VSCode + 后端IntelliJ IDEA
