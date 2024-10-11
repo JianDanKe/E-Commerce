@@ -29,3 +29,6 @@ pagehelper:
   params: count=countSql
 
 ip: localhost
+logging:
+  file:
+    name: logs/app.log

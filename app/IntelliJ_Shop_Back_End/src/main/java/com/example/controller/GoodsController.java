@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Goods;
 import com.example.service.GoodsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -89,5 +90,12 @@ public class GoodsController {
     public Result selectPage(Goods goods, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Goods> page = goodsService.selectPage(goods, pageNum, pageSize);
         return Result.success(page);
+    }
+
+    // 个性化推荐
+    @GetMapping("/selectRecommend")
+    public Result selectRecommend() throws JsonProcessingException {
+        List<Goods> list = goodsService.recommend();
+        return Result.success(list);
     }
 }

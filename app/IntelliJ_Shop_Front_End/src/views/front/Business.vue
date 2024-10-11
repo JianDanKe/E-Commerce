@@ -3,7 +3,7 @@
     <div style="width: 60%; margin: 30px auto; border-radius: 20px">
       <div style="height: 100px; padding: 0 10px; display: flex; align-items: center; border-radius: 25px; background-color: white;">
         <img :src="businessData.avatar" alt="" style="height: 60px; width: 60px; border-radius: 50%">
-        <div style="width: 220px; margin: 0 30px 0 15px; font-size: 20px; font-weight: bold;">
+        <div style="width: 80px; margin: 0 30px 0 15px; font-size: 20px; font-weight: bold;">
           <div style="height: 30px; line-height: 30px">{{businessData.name}}</div>
           <img src="@/assets/imgs/icon.png" alt="" style="height: 25px; margin-top: 5px">
         </div>
@@ -11,12 +11,12 @@
           <div style="font-size: 16px; height: 30px; line-height: 30px; color: #7F7F7FFF">店铺电话</div>
           <div style="font-size: 16px; height: 30px; line-height: 30px; ">{{businessData.phone}}</div>
         </div>
-        <div style="width: 150px; height: 100px; padding: 20px">
+        <div style="width: 200px; height: 100px; padding: 20px; margin-left: -20px;">
           <div style="font-size: 16px; height: 30px; line-height: 30px; color: #7F7F7FFF">店铺邮箱</div>
           <div style="font-size: 16px; height: 30px; line-height: 30px; ">{{businessData.email}}</div>
         </div>
         <div style="flex: 1; height: 100px; padding: 20px">
-          <div style="height: 60px; line-height: 30px; font-size: 16px; color: #000000FF; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+          <div style="height: 60px; line-height: 30px; font-size: 16px; color: #7F7F7FFF; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
             店铺介绍：{{businessData.description}}
           </div>
         </div>

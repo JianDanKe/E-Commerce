@@ -9,7 +9,7 @@
           <el-col :span="12">
             <div style="font-size: 20px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{goodsData.name}}</div>
             <div style="color: #666666FF; margin-top: 5px">销量：{{goodsData.count}}</div>
-            <div style="color: red; margin-top: 15px">疯抢价：<span style="font-size: 20px">{{goodsData.price}} / {{goodsData.unit}}</span></div>
+            <div style="color: red; margin-top: 15px">疯抢价：<span style="font-size: 20px">￥{{goodsData.price}}/{{goodsData.unit}}</span></div>
             <div style="margin-top: 20px">
               <img src="@/assets/imgs/right.png" alt="" style="width: 70%; height: 130px; border-radius: 15px">
             </div>
@@ -25,10 +25,10 @@
       <!-- 宝贝详情 和 宝贝评价 tab栏切换模块    -->
       <div style="padding: 15px 20px">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="宝贝详情" name="first">
+          <el-tab-pane label="商品详情" name="first">
             <div style="padding: 10px 175px" v-html="goodsData.description"></div>
           </el-tab-pane>
-          <el-tab-pane label="宝贝评价" name="second">
+          <el-tab-pane label="商品评价" name="second">
             <div style="margin-top: 10px">
               <div style="margin-top: 20px" v-for="item in commentData" :key="item.id">
                 <div style="display: flex">
