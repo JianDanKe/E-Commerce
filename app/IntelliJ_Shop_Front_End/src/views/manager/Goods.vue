@@ -141,7 +141,7 @@ export default {
       },
       ids: [],
       typeData: [],
-      viewData: null,   //
+      viewData: null,
     }
   },
   created() {

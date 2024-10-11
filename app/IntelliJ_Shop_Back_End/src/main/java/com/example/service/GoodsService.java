@@ -5,6 +5,8 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.*;
 import com.example.mapper.*;
 import com.example.utils.TokenUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -103,7 +105,7 @@ public class GoodsService {
     }
 
     // 推荐算法
-    public List<Goods> recommend() {
+    public List<Goods> recommend() throws JsonProcessingException {
         Account currentUser = TokenUtils.getCurrentUser();
         if (ObjectUtil.isEmpty(currentUser)) {
             return new ArrayList<>();
@@ -115,7 +117,7 @@ public class GoodsService {
         // 2. 获取所有的购物车信息
         List<Cart> allCarts = cartMapper.selectAll(null);
         // 3. 获取所有的订单信息
-        List<Orders> allOrders = ordersMapper.selectAllOKOrders();
+        List<Orders> allOrders = ordersMapper.selectAll(null);
         // 4. 获取所有的评论信息
         List<Comment> allComments = commentMapper.selectAll(null);
         // 5. 获取所有的用户信息
@@ -164,10 +166,14 @@ public class GoodsService {
 
         // 数据准备结束后，就把这些数据一起喂给这个推荐算法
         List<Integer> goodsIds = UserCF.recommend(currentUser.getId(), data);
+        System.out.println(goodsIds);
         // 把商品id转换成商品
         List<Goods> recommendResult = goodsIds.stream().map(goodsId -> allGoods.stream()
                         .filter(x -> x.getId().equals(goodsId)).findFirst().orElse(null))
                 .limit(10).collect(Collectors.toList());
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonResult = objectMapper.writeValueAsString(recommendResult);
+        System.out.println(jsonResult);
 
         //        if (CollectionUtil.isEmpty(recommendResult)) {
         //            // 随机给它推荐10个

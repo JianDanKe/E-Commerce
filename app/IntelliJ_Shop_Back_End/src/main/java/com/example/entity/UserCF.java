@@ -34,10 +34,13 @@ public class UserCF {
 
         // 最近邻用户看过商品列表
         List<Integer> neighborItems = userMap.get(nearestUserId).stream().map(RelateDTO::getGoodsId).collect(Collectors.toList());
+        System.out.println(neighborItems);
         // 指定用户看过商品列表
         List<Integer> userItems = userMap.get(userId).stream().map(RelateDTO::getGoodsId).collect(Collectors.toList());
+        System.out.println(userItems);
         // 找到最近邻看过，但是该用户没看过的商品
         neighborItems.removeAll(userItems);
+        System.out.println(neighborItems);
         return neighborItems;
     }
 }

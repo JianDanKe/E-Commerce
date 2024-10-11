@@ -24,7 +24,8 @@ public interface GoodsMapper {
     List<Goods> selectByBusinessId(Integer id);
 
     // 查询销量前15的商品
-    @Select("select * from goods order by count desc limit 15")
+    // @Select("select * from goods order by count desc limit 15")
+    @Select("select * from goods order by count desc")
     List<Goods> selectTop15();
 
     // 查询特定名字商品

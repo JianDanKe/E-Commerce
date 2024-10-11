@@ -17,14 +17,14 @@
         <div style="font-size: 18px; color: #000000FF; line-height: 80px; border-bottom: #cccccc 1px solid">猜你喜欢</div>
         <div style="margin: 20px 0; padding: 0 10px">
           <div style="margin-bottom: 20px">
-            <img @click="navTo('/front/detail?id=' + item.id)" src="@/assets/imgs/demo1.png" alt="" style="width: 100%; height: 175px; border-radius: 10px; border: #cccccc 1px solid">
-            <div style="margin-top: 10px; font-weight: 500; font-size: 16px; width: 180px; color: #000000FF; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">顶顶顶顶</div>
-            <div style="margin-top: 5px; font-size: 20px; color: #FF5000FF">￥999/件</div>
+            <img @click="navTo('/front/detail?id=' + item.id)" :src="getImageSrc1" alt="" style="width: 100%; height: 175px; border-radius: 10px; border: #cccccc 1px solid">
+            <div style="margin-top: 10px; font-weight: 500; font-size: 16px; width: 180px; color: #000000FF; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ recommendData[0]?.name }}</div>
+            <div style="margin-top: 5px; font-size: 20px; color: #FF5000FF">￥{{ recommendData[0]?.price }}/{{ recommendData[0]?.unit }}</div>
           </div>
           <div>
-            <img @click="navTo('/front/detail?id=' + item.id)" src="@/assets/imgs/demo2.png" alt="" style="width: 100%; height: 175px; border-radius: 10px; border: #cccccc 1px solid">
-            <div style="margin-top: 10px; font-weight: 500; font-size: 16px; width: 180px; color: #000000FF; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">顶顶顶顶</div>
-            <div style="margin-top: 5px; font-size: 20px; color: #FF5000FF">￥69/件</div>
+            <img @click="navTo('/front/detail?id=' + item.id)" :src="getImageSrc2" alt="" style="width: 100%; height: 175px; border-radius: 10px; border: #cccccc 1px solid">
+            <div style="margin-top: 10px; font-weight: 500; font-size: 16px; width: 180px; color: #000000FF; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ recommendData[1]?.name }}</div>
+            <div style="margin-top: 5px; font-size: 20px; color: #FF5000FF">￥{{ recommendData[1]?.price }}/{{ recommendData[1]?.unit }}</div>
           </div>
         </div>
       </div>
@@ -35,19 +35,28 @@
 <script>
 
 export default {
-
   data() {
     let typeId = this.$route.query.id
     return {
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       typeId: typeId,
       goodsData: [],
-      typeData: {}
+      typeData: {},
+      recommendData:[]
     }
   },
   mounted() {
     this.loadGoods()
     this.loadType()
+    this.loadRecommend()
+  },
+  computed: {
+    getImageSrc1() {
+      return this.recommendData[0]?.img || require('@/assets/imgs/demo1.png');
+    },
+    getImageSrc2() {
+      return this.recommendData[1]?.img || require('@/assets/imgs/demo2.png');
+    }
   },
   methods: {
     loadType() {
@@ -70,6 +79,16 @@ export default {
     },
     navTo(url) {
       location.href = url
+    },
+    loadRecommend(){
+      this.$request.get('/goods/selectRecommend').then(res => {
+        if (res.code == '200') {
+          this.recommendData = res.data
+          console.log(this.recommendData)
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
     }
   }
 }
